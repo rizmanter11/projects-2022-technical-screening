@@ -29,11 +29,53 @@ var assert = require("assert")
 // Input numArray: []
 // Output numArray: []
 // Explanation: Empty array...
+function findNeg(value, index, array){
+    return value < 0;
+}
+
+function findPos(value, index, array){
+    return value >= 0;
+}
+
+function negArr(value){
+    return value < 0;
+}
+
+function posArr(value){
+    return value >= 0;
+}
 
 const altNumbers = (numArray) => {
-    // TODO: COMPLETE THIS FUNCTION
-    return [];
+    let len = numArray.length;
+    let start = 0;
+    const temp = numArray;
+    const result = [];
+    const posCount = numArray.filter(posArr).length;
+    const negCount = numArray.filter(negArr).length;
+
+    if(posCount > negCount){
+        start = 1;
+    } else {
+        start = 0;
+    }
+    for(let i = 0; i < len; i++){
+        let plc = null;
+        if(start % 2 == 0){
+            plc = temp.find(findNeg);
+            result.push(plc);
+        } else {
+            plc = temp.find(findPos);
+            result.push(plc);
+        }
+        let index = temp.indexOf(plc);
+        temp.splice(index,1);
+        start++;
+    }
+    
+    return result;
 }
+
+
 
 module.exports = { altNumbers } // Do not modify this line
 
